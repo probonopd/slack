@@ -27,7 +27,7 @@ jobs:
       run: |
         APPDIR=$(readlink -f appdir) # Why is this needed?
         DESTDIR="$APPDIR" ninja -C build install
-        wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
+        wget -c -q https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
         chmod +x appimagetool-*.AppImage
         mkdir -p "$APPDIR"/usr/share/icons/hicolor/128x128/apps/
         cp data/icon.png "$APPDIR"/usr/share/icons/hicolor/128x128/apps/com.github.cassidyjames.slack.png
@@ -50,7 +50,7 @@ jobs:
         prerelease: true
         draft: false
         files: |
-          slack*.AppImage*
+          Slack*.AppImage*
         repo_token: ${{ secrets.GITHUB_TOKEN }}
 
 
