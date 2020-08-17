@@ -38,8 +38,8 @@ jobs:
         ./appimagetool-*.AppImage -s deploy "$APPDIR"/usr/share/applications/*.desktop --appimage-extract-and-run # Bundle EVERYTHING
         sed -i -e 's|/usr||g' "$APPDIR"/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders.cache # FIXME in https://github.com/probonopd/go-appimage
         # ( cd "$APPDIR"/usr/share/mime/ ; ln -s /usr/share/mime/mime.cache . ) # FIXME in https://github.com/probonopd/go-appimage; https://github.com/probonopd/go-appimage/issues/58#issuecomment-675010671
-        # mkdir -p "$APPDIR"/usr/share/icons ; cp -r /usr/share/icons/elementary "$APPDIR"/usr/share/icons/ # https://github.com/akiraux/Akira/issues/3#issuecomment-674544807 and https://github.com/probonopd/go-appimage/blob/c522796229a3669afdf8b4870b045b597332c5a2/src/appimagetool/appdirtool.go#L715-L722
-        # mkdir -p "$APPDIR"/usr/share/themes ; cp -r /usr/share/themes/elementary "$APPDIR"/usr/share/themes/ # https://github.com/akiraux/Akira/issues/3#issuecomment-674544807
+        mkdir -p "$APPDIR"/usr/share/icons ; cp -r /usr/share/icons/elementary "$APPDIR"/usr/share/icons/ # https://github.com/akiraux/Akira/issues/3#issuecomment-674544807 and https://github.com/probonopd/go-appimage/blob/c522796229a3669afdf8b4870b045b597332c5a2/src/appimagetool/appdirtool.go#L715-L722
+        mkdir -p "$APPDIR"/usr/share/themes ; cp -r /usr/share/themes/elementary "$APPDIR"/usr/share/themes/ # https://github.com/akiraux/Akira/issues/3#issuecomment-674544807
         rm -rf "$APPDIR"/usr/share/themes/Default ; sed -i -e 's|Default|elementary|g' "$APPDIR"/AppRun # Use the elementary theme rather than the Gtk Default theme
         ./appimagetool-*.AppImage "$APPDIR" --appimage-extract-and-run # turn AppDir into AppImage
     - name: Release AppImage
